@@ -37,10 +37,10 @@ fi
 
 git remote add destination "$DESTINATION_REPO"
 
-# Pull only relevant branch references down locally so subsequent commands can see them
-git fetch source '${SOURCE_BRANCH}:${DESTINATION_BRANCH}' --update-head-ok
+# Pull all branches references down locally so subsequent commands can see them
+git fetch source '${SOURCE_BRANCH}:${SOURCE_BRANCH}' --update-head-ok
 
-# Print out all relevant branches
+# Print out all branches
 git --no-pager branch -a -vv
 
 if [[ -n "$DESTINATION_SSH_PRIVATE_KEY" ]]; then
