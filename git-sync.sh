@@ -38,7 +38,7 @@ fi
 git remote add destination "$DESTINATION_REPO"
 
 # Pull specific source branch reference down locally so subsequent commands can see it
-git fetch source '${SOURCE_BRANCH}' --update-head-ok
+git fetch source "${SOURCE_BRANCH}" --update-head-ok
 
 # Print out branches
 git --no-pager branch -a -vv
