@@ -3,7 +3,7 @@
 set -e
 
 SOURCE_REPO=$1
-SOURCE_BRANCH=$2
+BRANCH=$2
 DESTINATION_REPO=$3
 DESTINATION_BRANCH=$4
 
@@ -25,8 +25,8 @@ if ! echo $DESTINATION_REPO | grep -Eq ':|@|\.git\/?$'; then
   fi
 fi
 
-echo "SOURCE=$SOURCE_REPO:$SOURCE_BRANCH"
-echo "DESTINATION=$DESTINATION_REPO:$DESTINATION_BRANCH"
+echo "SOURCE=$SOURCE_REPO:$BRANCH"
+echo "DESTINATION=$DESTINATION_REPO:$BRANCH"
 
 if [[ -n "$SOURCE_SSH_PRIVATE_KEY" ]]; then
   # Clone using source ssh key if provided
@@ -38,7 +38,7 @@ fi
 git remote add destination "$DESTINATION_REPO"
 
 # Pull specific source branch reference down locally so subsequent commands can see it
-git fetch source "${SOURCE_BRANCH}" --update-head-ok
+git fetch source "${BRANCH}" --update-head-ok
 
 # Print out branches
 git --no-pager branch -a -vv
@@ -48,4 +48,4 @@ if [[ -n "$DESTINATION_SSH_PRIVATE_KEY" ]]; then
   git config --local core.sshCommand "/usr/bin/ssh -i ~/.ssh/dst_rsa"
 fi
 
-git push destination "${SOURCE_BRANCH}:${DESTINATION_BRANCH}" -f
+git push destination "${BRANCH}" -f
