@@ -41,11 +41,11 @@ git remote add destination "$DESTINATION_REPO"
 git fetch source "${BRANCH}" --update-head-ok
 
 # Print out branches
-git --no-pager branch -a -vv
+git --no-pager branch -a -vv | grep "${BRANCH}"
 
 if [[ -n "$DESTINATION_SSH_PRIVATE_KEY" ]]; then
   # Push using destination ssh key if provided
   git config --local core.sshCommand "/usr/bin/ssh -i ~/.ssh/dst_rsa"
 fi
 
-git push destination "${BRANCH}" -f
+git push destination "remotes/source/${BRANCH}:${BRANCH}" -f
