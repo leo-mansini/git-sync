@@ -48,4 +48,4 @@ if [[ -n "$DESTINATION_SSH_PRIVATE_KEY" ]]; then
   git config --local core.sshCommand "/usr/bin/ssh -i ~/.ssh/dst_rsa"
 fi
 
-git push destination "remotes/source/${BRANCH}:${BRANCH}" -f
+git push destination "remotes/source/${BRANCH}:refs/heads/${BRANCH}" -f
